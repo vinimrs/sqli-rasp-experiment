@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webgoat
+  namespace: sqli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webgoat
+  template:
+    metadata:
+      labels:
+        app: webgoat
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: webgoat
+          image: webgoat-rasp:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /WebGoat
+              port: 8080
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 60
+          readinessProbe:
+            httpGet:
+              path: /WebGoat
+              port: 8080
+            initialDelaySeconds: 10
+            timeoutSeconds: 5
+            periodSeconds: 10
+            failureThreshold: 6
+          livenessProbe:
+            httpGet:
+              path: /WebGoat
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 5
+            periodSeconds: 20
+            failureThreshold: 6
+        - name: sidecar-proxy
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 8081
+          volumeMounts:
+            - name: webgoat-sidecar-conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
+      volumes:
+        - name: webgoat-sidecar-conf
+          configMap:
+            name: webgoat-sidecar-nginx

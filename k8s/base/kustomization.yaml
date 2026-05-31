@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: sqli
+resources:
+  - 00-namespace.yaml
+  - 01-configmaps.yaml
+  - 10-webgoat-deployment.yaml
+  - 11-webgoat-service.yaml
+  - 30-gateway-deployment.yaml
+  - 31-gateway-service.yaml
+  - 40-network-policies.yaml

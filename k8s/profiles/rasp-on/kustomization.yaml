@@ -1,0 +1,39 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../../base
+patches:
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: api-gateway
+      namespace: sqli
+    spec:
+      template:
+        spec:
+          containers:
+            - name: gateway
+              env:
+                - name: MODSEC_RULE_ENGINE
+                  value: "Off"
+  target:
+    kind: Deployment
+    name: api-gateway
+- patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: webgoat
+      namespace: sqli
+    spec:
+      template:
+        spec:
+          containers:
+            - name: webgoat
+              env:
+                - name: JAVA_TOOL_OPTIONS
+                  value: "--add-opens=java.base/jdk.internal.loader=ALL-UNNAMED -javaagent:/opt/rasp/rasp.jar"
+  target:
+    kind: Deployment
+    name: webgoat

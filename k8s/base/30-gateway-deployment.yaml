@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  namespace: sqli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+        - name: gateway
+          image: owasp/modsecurity-crs:nginx
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: SERVER_NAME
+              value: "_"
+            - name: MODSEC_RULE_ENGINE
+              value: "On"
+            - name: MODSEC_REQ_BODY_ACCESS
+              value: "On"
+            - name: MODSEC_RESP_BODY_ACCESS
+              value: "Off"
+          volumeMounts:
+            - name: gateway-conf
+              mountPath: /etc/nginx/templates/conf.d/default.conf.template
+              subPath: default.conf
+      volumes:
+        - name: gateway-conf
+          configMap:
+            name: gateway-nginx

@@ -1,0 +1,2 @@
+profile,reg_status,login_status,safe_status,safe_time_s,sqli_status,sqli_time_s,detector,zap_alerts_total,zap_alerts_sqli,zap_alerts_high,zap_alerts_medium,zap_requests_total,zap_blocked_total,zap_blocked_waf,zap_blocked_rasp,zap_sqli_like_total,zap_sqli_like_blocked
+current,302,302,200,0.284560,302,0.064073,rasp,33,1,1,4,556,88,0,88,117,48

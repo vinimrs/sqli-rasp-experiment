@@ -1,0 +1,26 @@
+event: [2026-06-01 21:53:36] START_PROFILE CURRENT
+event: [2026-06-01 21:53:36] USING_CURRENT_CLUSTER_STATE profile=current
+event: [2026-06-01 21:53:36] WEBGOAT_PODS count=2 running=2 ready=2 names=webgoat-75b8f6ff8c-9cr8d,webgoat-bb89859d9-l976g
+event: [2026-06-01 21:53:39] WEBGOAT_PODS count=1 running=1 ready=1 names=webgoat-bb89859d9-l976g
+event: [2026-06-01 21:53:40] OPENRASP_RUNTIME CURRENT status=loaded evidence=javaagent-detected
+event: [2026-06-01 21:53:41] START_ZAP CURRENT
+event: [2026-06-01 21:53:55] ZAP_READY CURRENT
+== current probe ==
+reg=302 login=302 safe=200 0.625377s sqli=302 0.181620s detector=rasp
+sqli_headers:
+Server: nginx/1.28.2
+Date: Tue, 02 Jun 2026 00:53:59 GMT
+Content-Length: 118
+Connection: keep-alive
+X-Request-ID: ce6cf1ae687f4ce7927636e8b3d07ead
+X-Protected-By: OpenRASP
+Location: https://rasp.baidu.com/blocked/?request_id=ce6cf1ae687f4ce7927636e8b3d07ead
+---
+event: [2026-06-01 21:53:59] ZAP_SEED_DONE CURRENT
+event: [2026-06-01 21:53:59] ZAP_SCAN_START CURRENT
+== current zap ==
+spider_target=http://host.docker.internal:18080/webgoat/WebGoat/SqlInjection ascan_targets=http://host.docker.internal:18080/webgoat/WebGoat/SqlInjection
+alerts_total=33 alerts_sqli=1 high=1 medium=4 requests_total=556 blocked_total=88 blocked_waf=0 blocked_rasp=88 sqli_like_total=117 sqli_like_blocked=48
+sqli_alert: SQL Injection - Hypersonic SQL risk=High url=http://host.docker.internal:18080/webgoat/WebGoat/SqlInjection/attack8 param=name
+---
+event: [2026-06-01 21:54:42] ZAP_SCAN_DONE CURRENT

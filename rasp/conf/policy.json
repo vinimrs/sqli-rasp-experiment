@@ -1,0 +1,47 @@
+{
+  "version": "1.0",
+  "policies": [
+    {
+      "name": "sql_injection_block",
+      "attack_type": "sql",
+      "action": "block",
+      "enabled": true,
+      "description": "Block all SQL injection attempts"
+    },
+    {
+      "name": "ssrf_block",
+      "attack_type": "ssrf",
+      "action": "block",
+      "enabled": true,
+      "description": "Block all SSRF attempts"
+    },
+    {
+      "name": "command_injection_block",
+      "attack_type": "command",
+      "action": "block",
+      "enabled": true,
+      "description": "Block all command injection attempts"
+    },
+    {
+      "name": "deserialization_block",
+      "attack_type": "deserialization",
+      "action": "block",
+      "enabled": true,
+      "description": "Block all deserialization attacks"
+    },
+    {
+      "name": "file_operations_block",
+      "attack_type": "readFile",
+      "action": "block",
+      "enabled": true,
+      "description": "Block unauthorized file read attempts"
+    },
+    {
+      "name": "file_write_block",
+      "attack_type": "writeFile",
+      "action": "block",
+      "enabled": true,
+      "description": "Block unauthorized file write attempts"
+    }
+  ]
+}
